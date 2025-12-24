@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Even & Odd Counter</title>
+    <style>
+        h3{
+            color: rgb(0, 0, 0);
+            text-shadow: #ddd 1px 1px 2px;
+            font-size: 40px;
+        }
+        p{
+            font-size: 20px;
+            text-shadow: #ddd 1px 1px 2px;
+        }
+        body{
+            font-family: 'Segoe UI', sans-serif;
+            background: #1b042e; 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 50px;
+        }
+        .card{ 
+            background: rgb(128, 94, 200); 
+            padding: 2rem; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            width: 350px; 
+        }
+        input{ 
+            width: 100%; 
+            padding: 10px; 
+            margin: 10px 0; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            box-sizing: border-box; 
+        }
+        .result{ 
+            font-weight: bold; 
+            color: #10024f; 
+            margin-top: 15px; 
+            font-size: 30px;
+            text-shadow: #e6d8d8;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h3>Even/Odd Counter</h3>
+        <p><b>Enter numbers (comma separated):</b></p>
+        <input type="text" id="nums" placeholder="e.g. 1, 2, 3, 4" oninput="countNumbers()">
+        <div class="result" id="res">Evens: 0 | Odds: 0</div>
+    </div>
+
+    <script>
+        function countNumbers() {
+            const val = document.getElementById('nums').value;
+            const arr = val.split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+            let even = 0, odd = 0;
+            arr.forEach(n => n % 2 === 0 ? even++ : odd++);
+            document.getElementById('res').innerText = `Evens: ${even} | Odds: ${odd}`;
+        }
+    </script>
+</body>
+</html>

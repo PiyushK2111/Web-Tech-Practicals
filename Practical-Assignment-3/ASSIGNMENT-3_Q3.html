@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array Sum</title>
+    <style>
+        body{ 
+            font-family:cursive; 
+            background: #08124a; 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 50px; 
+        }
+        .box{ 
+            background: rgb(111, 180, 215); 
+            padding: 25px; 
+            border-radius: 15px; 
+            border: 2px solid #0a6fda; 
+            text-align: center; 
+        }
+        input{ 
+            padding: 10px; 
+            border-radius: 20px; 
+            border: 1px solid #ccc; 
+
+            outline: none; 
+            width: 200px; 
+        }
+        h2{ 
+            color: #02151b;
+            font-size: 40px;
+        }
+        p{
+            font-size: 30px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Sum Calculator</h2>
+        <input type="text" id="sumIn" placeholder="Enter numbers: 10, 20, 30" oninput="calculate()">
+        <p>Total: <span id="total">0</span></p>
+    </div>
+    <script>
+        function calculate() {
+            const val = document.getElementById('sumIn').value;
+            const sum = val.split(',').map(n => parseFloat(n)).reduce((a, b) => !isNaN(b) ? a + b : a, 0);
+            document.getElementById('total').innerText = sum;
+        }
+    </script>
+</body>
+</html>
