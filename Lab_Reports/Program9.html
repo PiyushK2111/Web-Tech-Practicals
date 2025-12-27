@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Responsive Mobile-First Web Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 1rem;
+            font-size: 1rem;
+            background-color: #f8f9fa;
+            color: #242424;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            margin: 1rem 0;
+            padding: 0;
+            text-align: center;
+        }
+        nav a {
+            display: inline-block;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: #007bff;
+            border: 2px solid #007bff;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        main {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        section {
+            background-color: rgb(191, 172, 172);
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            margin-top: 0;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        @media (min-width: 600px) {
+            body {
+                font-size: 1.125rem;
+            }
+            nav a {
+                margin: 0 1rem;
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+            }
+            main {
+                max-width: 700px;
+            }
+        }
+        @media (min-width: 900px) {
+            body {
+                font-size: 1.25rem;
+                padding: 2rem 4rem;
+                background-color: aquamarine;
+            }
+            nav {
+                text-align: left;
+            }
+            nav a {
+                margin: 0 1.5rem 0 0;
+                font-size: 1.125rem;
+                background-color: brown;
+            }
+            main {
+                max-width: 900px;
+                display: flex;
+                gap: 2rem;
+            }
+            section {
+                flex: 1;
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Responsive Mobile-First Web Page</h1>
+    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <main>
+        <section id="home">
+            <h2>Hi Developers</h2>
+            <p>This is a responsive webpage that adjusts its layout and font sizes across different devices using media queries.</p>
+        </section>
+    </main>
+</body>
+</html>
