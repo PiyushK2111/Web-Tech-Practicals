@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Form Validation</title>
+    <style>
+        body{ 
+            font-family: Arial, sans-serif; 
+            margin: 40px; 
+            line-height: 1.6;
+        }
+        .form-container{ 
+            max-width: 400px; 
+            padding: 20px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+        }
+        label{ 
+            display: block; 
+            margin-top: 15px; 
+            font-weight: bold; 
+        }
+        input,select{ 
+            width: 100%; 
+            padding: 8px; 
+            margin-top: 5px; 
+            box-sizing: border-box; 
+        }
+        button{ 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 15px; 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
+        .error{ 
+            color: #dc3545; 
+            font-size: 14px; 
+            margin-top: 5px; 
+            display: none; 
+        }
+        .valid{ 
+            color: #28a745; 
+            font-size: 14px; 
+            margin-top: 5px; 
+            display: none; 
+        }
+        input:invalid{ 
+            border-color: #dc3545; 
+        }
+        input:valid{ 
+            border-color: #28a745; 
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Registration Form Validation</h2>
+        <form id="userForm" onsubmit="return validateForm(event)">
+            <label for="username">Username (char 3+):</label>
+            <input type="text" id="username" name="username" required minlength="3" oninput="validateUsername()">
+            <div id="username-error" class="error">Username must be 3+ characters</div>
+            <div id="username-valid" class="valid">✓ Valid username</div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required oninput="validateEmail()">
+            <div id="email-error" class="error">Please enter valid email</div>
+            <div id="email-valid" class="valid">✓ Valid email</div>    
+            <label for="age">Age (18+):</label>
+            <input type="number" id="age" name="age" required min="18" oninput="validateAge()">
+            <div id="age-error" class="error">Age must be 18 or older</div>
+            <div id="age-valid" class="valid">✓ Valid age</div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required minlength="8" oninput="validatePassword()">
+            <div id="password-error" class="error">Password must be 8+ characters</div>
+            <div id="password-valid" class="valid">✓ Valid password</div>
+            <label>Gender:</label>
+            <select id="gender" name="gender" required onchange="validateGender()">
+                <option value="">Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <div id="gender-error" class="error">Please select gender</div>
+            <div id="gender-valid" class="valid">✓ Gender selected</div>
+            <button type="submit">Register</button>
+        </form>
+        <div id="success-message" style="margin-top: 20px; padding: 15px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px; display: none;">
+            ✓ Form submitted successfully!
+        </div>
+    </div>
+    <script>
+        function validateUsername() {
+            const field = document.getElementById('username');
+            const error = document.getElementById('username-error');
+            const valid = document.getElementById('username-valid');
+            if (field.value.length >= 3) {
+                error.style.display = 'none';
+                valid.style.display = 'block';
+            } else {
+                error.style.display = 'block';
+                valid.style.display = 'none';
+            }
+        }
+        function validateEmail() {
+            const field = document.getElementById('email');
+            const error = document.getElementById('email-error');
+            const valid = document.getElementById('email-valid');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(field.value)) {
+                error.style.display = 'none';
+                valid.style.display = 'block';
+            } else {
+                error.style.display = 'block';
+                valid.style.display = 'none';
+            }
+        }
+        function validateAge() {
+            const field = document.getElementById('age');
+            const error = document.getElementById('age-error');
+            const valid = document.getElementById('age-valid');
+            if (field.value >= 18) {
+                error.style.display = 'none';
+                valid.style.display = 'block';
+            } else {
+                error.style.display = 'block';
+                valid.style.display = 'none';
+            }
+        }
+        function validatePassword() {
+            const field = document.getElementById('password');
+            const error = document.getElementById('password-error');
+            const valid = document.getElementById('password-valid');
+            if (field.value.length >= 8) {
+                error.style.display = 'none';
+                valid.style.display = 'block';
+            } else {
+                error.style.display = 'block';
+                valid.style.display = 'none';
+            }
+        }
+        function validateGender() {
+            const field = document.getElementById('gender');
+            const error = document.getElementById('gender-error');
+            const valid = document.getElementById('gender-valid');
+            if (field.value !== '') {
+                error.style.display = 'none';
+                valid.style.display = 'block';
+            } else {
+                error.style.display = 'block';
+                valid.style.display = 'none';
+            }
+        }
+        function validateForm(event) {
+            event.preventDefault();
+            const isUsernameValid = document.getElementById('username').value.length >= 3;
+            const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value);
+            const isAgeValid = parseInt(document.getElementById('age').value) >= 18;
+            const isPasswordValid = document.getElementById('password').value.length >= 8;
+            const isGenderValid = document.getElementById('gender').value !== '';
+            if (isUsernameValid && isEmailValid && isAgeValid && isPasswordValid && isGenderValid){
+                document.getElementById('success-message').style.display = 'block';
+                alert(`Registration successful!\nUsername: ${document.getElementById('username').value}\nEmail: ${document.getElementById('email').value}`);
+            } else {
+                let errors = [];
+                if (!isUsernameValid) errors.push('Username');
+                if (!isEmailValid) errors.push('Email');
+                if (!isAgeValid) errors.push('Age');
+                if (!isPasswordValid) errors.push('Password');
+                if (!isGenderValid) errors.push('Gender');
+                alert(`Please fix these errors:\n${errors.join(', ')}`);
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>

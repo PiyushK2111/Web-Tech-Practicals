@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Conditionals & Loops Demo</title>
+    <style>
+        body{ 
+            font-family: Arial, sans-serif; 
+            margin: 40px; 
+            line-height: 1.6; 
+        }
+        .demo{ 
+            border: 1px solid #ddd; 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 8px; 
+        }
+        button{ 
+            padding: 10px 20px; 
+            margin: 5px; 
+            cursor: pointer; 
+        }
+        pre{ 
+            background: #f5f5f5; 
+            padding: 15px; 
+            border-radius: 4px; 
+            overflow-x: auto; 
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Conditionals & Loops</h1>
+    <div class="demo">
+        <h2>1. Conditional Statements</h2>
+        <button onclick="demoConditionals()">Run Conditionals</button>
+        <pre id="conditionals-output"></pre>
+    </div>
+    <div class="demo">
+        <h2>2. Loops Demo</h2>
+        <button onclick="demoLoops()">Run Loops</button>
+        <pre id="loops-output"></pre>
+    </div>
+    <script>
+        function demoConditionals() {
+            const output = document.getElementById('conditionals-output');
+            let result = '';
+            let score = 85;
+            if (score >= 90) {                                   // If-else statement
+                result += `Score ${score}: Grade A\n`;
+            } else if (score >= 80) {
+                result += `Score ${score}: Grade B\n`;
+            } else if (score >= 70) {
+                result += `Score ${score}: Grade C\n`;
+            } else {
+                result += `Score ${score}: Grade F\n`;
+            }
+            let day = 3;                                          // Switch-case
+            switch (day) {
+                case 1: result += 'Monday\n'; break;
+                case 2: result += 'Tuesday\n'; break;
+                case 3: result += 'Wednesday\n'; break;
+                case 4: result += 'Thursday\n'; break;
+                case 5: result += 'Friday\n'; break;
+                case 6: case 7: result += 'Weekend\n'; break;
+                default: result += 'Invalid day\n';
+            }
+            output.textContent = result;
+        }
+        function demoLoops() {
+            const output = document.getElementById('loops-output');
+            let result = '';
+            result += 'For Loop (0-4):\n';
+            for (let i = 0; i < 5; i++) {            //for loop
+                result += `  ${i}\n`;
+            }
+            result += '\nWhile Loop:\n';
+            let count = 0;
+            while (count < 5) {                      //while loop
+                result += `  Count: ${count}\n`;
+                count++;
+            }
+            result += '\nDo-While Loop:\n';
+            let num = 0;
+            do {                                     //do-while loop
+                result += `  Number: ${num}\n`;
+                num++;
+            } while (num < 3);
+            output.textContent = result;
+        }
+    </script>
+</body>
+</html>

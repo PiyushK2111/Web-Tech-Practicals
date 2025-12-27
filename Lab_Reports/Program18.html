@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Element Manipulation</title>
+    <style>
+        body{ 
+            font-family: Arial, sans-serif; 
+            margin: 40px; 
+            line-height: 1.6; 
+        }
+        .demo-section{ 
+            border: 1px solid #ddd; 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 8px; 
+        }
+        button{ 
+            padding: 10px 16px; 
+            margin: 5px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 4px; 
+            font-weight: 
+            bold; 
+        }
+        .add-btn{ 
+            background: #28a745; 
+            color: white; 
+        }
+        .remove-btn{ 
+            background: #dc3545; 
+            color: white; 
+        }
+        .clear-btn{ 
+            background: #6c757d; 
+            color: white; 
+        }
+        #container{
+            min-height: 200px; 
+            border: 2px dashed #007bff; 
+            padding: 20px;
+            border-radius: 8px; 
+            margin: 15px 0;
+        }
+        .dynamic-item{
+            padding: 12px; 
+            margin: 8px 0; 
+            border-radius: 6px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border-left: 4px solid #007bff; 
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .dynamic-item:hover{ 
+            transform: translateX(5px); 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        }
+        .item-id{ 
+            font-weight: bold; 
+            color: #007bff; 
+        }
+        .remove-item{ 
+            float: right; 
+            background: #dc3545; 
+            color: white; 
+            padding: 4px 8px; 
+            font-size: 12px; 
+        }
+        #log{ 
+            background: #f8f9fa; 
+            padding: 15px; 
+            height: 150px; 
+            overflow-y: auto; 
+            font-family: monospace; 
+            font-size: 14px; 
+        }
+        input{ 
+            padding: 8px; 
+            margin: 5px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+        }
+    </style>
+</head>
+<body>
+    <h1>DOM Element Creation & Manipulation</h1>
+    <div class="demo-section">
+        <h2>1. Create & Append Elements</h2>
+        <input type="text" id="item-text" placeholder="Enter item text">
+        <button class="add-btn" onclick="createAndAppend()">Add Item</button>
+        <button class="add-btn" onclick="createMultipleItems()">Add 5 Items</button>
+        <div id="container">
+            <p>Container ready for dynamic elements...</p>
+        </div>
+    </div>
+    <div class="demo-section">
+        <h2>2. Remove & Modify Nodes</h2>
+        <button class="remove-btn" onclick="clearAll()">Clear All</button>
+        <button class="add-btn" onclick="modifyFirstItem()">Modify First</button>
+        <div id="log"></div>
+    </div>
+    <script>
+        let itemCounter = 0;
+        function createAndAppend() {
+            const text = document.getElementById('item-text').value || 'New Item';
+            const item = document.createElement('div');
+            item.className = 'dynamic-item';
+            item.innerHTML = `
+                <span class="item-id">ID-${++itemCounter}</span>: ${text}
+                <button class="remove-item" onclick="removeThisItem(this)">× Remove</button>
+            `;
+            const container = document.getElementById('container');
+            container.appendChild(item);
+            logAction('createElement + appendChild', `Added: ${text}`);
+            document.getElementById('item-text').value = '';
+        }
+        function createMultipleItems() {
+            const container = document.getElementById('container');
+            for (let i = 0; i < 5; i++){
+                container.insertAdjacentHTML('beforeend', `
+                    <div class="dynamic-item">
+                        <span class="item-id">ID-${++itemCounter}</span>: Auto-generated #${i+1}
+                        <button class="remove-item" onclick="removeThisItem(this)">× Remove</button>
+                    </div>
+                `);
+            }
+            logAction('insertAdjacentHTML', 'Added 5 items');
+        }
+        function removeThisItem(button) {
+            const item = button.parentElement;
+            item.parentElement.removeChild(item);
+            logAction('removeChild', `Removed item ${item.querySelector('.item-id').textContent}`);
+        }
+        function clearAll() {
+            const container = document.getElementById('container');
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+            itemCounter = 0;
+            logAction('clearAll', 'All children removed');
+        }
+        function modifyFirstItem() {
+            const container = document.getElementById('container');
+            const firstChild = container.firstElementChild;
+            if (firstChild){
+                firstChild.querySelector('.item-id').textContent = `MODIFIED-${Date.now()}`;
+                firstChild.style.background = '#ffc107';
+                firstChild.style.borderLeftColor = '#ffc107';
+                firstChild.innerHTML = `
+                    <span class="item-id">${firstChild.querySelector('.item-id').textContent}</span>: 
+                    First item modified!
+                    <button class="remove-item" onclick="removeThisItem(this)">× Remove</button>
+                `;
+                logAction('modifyChild', 'First item modified');
+            } else {
+                logAction('modifyChild', 'No items to modify');
+            }
+        }
+        function logAction(action, message) {
+            const log = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            log.textContent += `[${time}] ${action}: ${message}\n`;
+            log.scrollTop = log.scrollHeight;
+        }
+    </script>
+</body>
+</html>
