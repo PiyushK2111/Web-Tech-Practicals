@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>CSS Selectors Demonstration</title>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .highlight {
+            background-color: #ffd54f;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #unique-paragraph {
+            color: darkgreen;
+            font-weight: bold;
+            border-left: 5px solid darkgreen;
+            padding-left: 11px;
+            margin: 2px;
+        }
+        p em {
+            color: #d32f2f;
+            font-style: normal;
+            font-weight: bold;
+        }
+        body {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        p {
+            margin: 15px 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS Selectors</h1>
+    <h2>Demonstration of Different Selectors</h2>
+
+    <p class="highlight">This paragraph uses the <b>class selector.</b></p>
+    <p id="unique-paragraph">This paragraph is styled using <b>id selector.</b></p>
+    <p>This paragraph contains <em>emphasized text</em> styled using the <b>descendant selector</b> that targets &lt;em&gt; inside &lt;p&gt;.</p>
+    <p>Notice that the <em>emphasized text</em> changes color due to this selector as well.</p>
+</body>
+</html>
