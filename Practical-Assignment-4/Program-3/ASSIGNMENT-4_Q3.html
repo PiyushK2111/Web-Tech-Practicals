@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Merge Arrays</title>
+    <style>
+        h2{
+            color: antiquewhite;
+            font-size: 50px;
+            text-shadow: #0badade0;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        body{ 
+            background: #151616; 
+            font-family: sans-serif; 
+            text-align: center; 
+        }
+        input{ 
+            padding: 10px; 
+            margin: 5px; 
+            border-radius: 5px; 
+            border: 1px solid #1d531c; 
+            background: #2d3636;
+            color: thistle;
+        }
+        .combined{ 
+            font-size: 30px; 
+            text-shadow: #ccd9cd;
+            color: #3fc848; 
+            margin-top: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <h2>Array Merger</h2>
+    <input type="text" id="a1" placeholder="Array 1 (a, b)" oninput="merge()">
+    <input type="text" id="a2" placeholder="Array 2 (c, d)" oninput="merge()">
+    <div class="combined" id="mergeOut">[]</div>
+
+    <script>
+        function merge() {
+            const arr1 = document.getElementById('a1').value.split(',');
+            const arr2 = document.getElementById('a2').value.split(',');
+            const merged = [...arr1, ...arr2].map(s => s.trim()).filter(s => s !== "");
+            document.getElementById('mergeOut').innerText = JSON.stringify(merged);
+        }
+    </script>
+</body>
+</html>
